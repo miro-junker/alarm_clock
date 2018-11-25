@@ -1,8 +1,5 @@
-let time = {
-    timeStr: new String,
-    hours: new Number,
-    minutes: new Number,
-    minuteCtr: new Number,
+function time() {
+    let timeStr, minuteCtr;
 };
 
 
@@ -28,4 +25,4 @@ let timeFactory = (initData) => {
     }
     
     return timeObj;
-}
+};
