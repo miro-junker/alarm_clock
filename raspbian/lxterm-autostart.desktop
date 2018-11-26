@@ -2,4 +2,4 @@
 Encoding=UTF-8
 Name=Terminal autostart
 Comment=Start a terminal and list directory
-Exec=/usr/bin/lxterm -e 'chromium-browser file:///home/pi/alarm_clock/index.html'
+Exec=/usr/bin/lxterm -e 'chromium-browser --autoplay-policy=no-user-gesture-required file:///home/pi/alarm_clock/index.html'
