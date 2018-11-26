@@ -1,8 +1,16 @@
 let refresh = 10; // every x seconds
 
+
+let state = {
+    ringing = false,
+};
+
+
 function wakeUp() {
     $('.sound1').trigger('play');
-};
+}
+
+
 
 setInterval( () => {
     let now = new Time();
@@ -29,10 +37,10 @@ setInterval( () => {
     console.log('Idealni cas vstavani: ' + wakeUp_time.timeStr);
 
     if(settings.force_wakeup_time) {
-        wakeUp_time = settings.force_wakeup_time;
+        wakeUp_time = new Time(settings.force_wakeup_time);
     }
 
-    console.log('Je: ' + now.timeStr + ' a mas vstavat v: ' + wakeUp_time);
+    console.log('Je: ' + now.timeStr + ' a mas vstavat v: ' + wakeUp_time.timeStr);
 
     if(now.timeStr === wakeUp_time.timeStr) {
         console.log('Cas vstavat!');
