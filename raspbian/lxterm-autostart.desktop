@@ -2,4 +2,4 @@
 Encoding=UTF-8
 Name=Terminal autostart
 Comment=Start a terminal and list directory
-Exec=/usr/bin/lxterm -e 'ls -l | less'
+Exec=/usr/bin/lxterm -e 'chromium-browser --kiosk www.autickar.cz'
