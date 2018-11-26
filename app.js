@@ -2,7 +2,7 @@ let refresh = 10; // every x seconds
 
 
 let state = {
-    ringing = false,
+    ringing: false,
 };
 
 
