@@ -5,46 +5,37 @@ function wakeUp() {
 };
 
 setInterval( () => {
-    let now = timeFactory();
-    console.log(now);
+    let now = new Time();
 
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let timeStr = `${String(hours)}:${String(minutes)}`;
-    let timeDateStr = `${String(day)}.${String(month)}. ${timeStr}`;
+    $('.time').text(now.timeDateStr);
 
-    $('.time').text(timeDateStr);
+    let sun_start = new Time(sun[now.month][now.day].start);
+    let sun_end = new Time(sun[now.month][now.day].end);
+    console.log('Vychod slunce: ' + sun_start.timeStr + ', zapad slunce: ' + sun_end.timeStr);
+    let daylight_length = timeDiff(sun_end, sun_start);
 
-    let sun_start = sun[month][day].start;
-    let sun_end = sun[month][day].end;
-
-    console.log(sun_start + ' zapad' + sun_end);
-
-    timeStr_to_minutes(settings.sleep_duration);
-
+    let sleep_length = Minutes(settings.sleep_duration);
+    let awake_length = getAwakeDuration(settings.sleep_duration)
 
     let wakeUp_time = sun_start;
-    if(awake_duration(settings.sleep_duration) < daylight_duration) {
-        console.log("jit spat se zapadem slunce");
-        wakeUp_time = timeStr_to_minutes(sun_end) - awake_duration(settings.sleep_duration);
+    if(awake_length < daylight_length) {
+        console.log('Jit spat se zapadem slunce');
+        wakeUp_time = new Time(sun_end.minuteCtr - awake_length);
     }
     else {
-        console.log("vstavat s vychodem slunce")
+        console.log('Vstavat s vychodem slunce')
     }
 
-    console.log("budik v: " + wakeUp_time);
+    console.log('Idealni cas vstavani: ' + wakeUp_time.timeStr);
 
+    if(settings.force_wakeup_time) {
+        wakeUp_time = settings.force_wakeup_time;
+    }
 
-    
+    console.log('Je: ' + now.timeStr + ' a mas vstavat v: ' + wakeUp_time);
 
-    wakeUp_time = '22:27';
-
-    console.log('je: ' + timeStr + " a mas vstavat v:" + wakeUp_time);
-    if(timeStr === wakeUp_time) {
-        console.log('cas vstavat!!');
+    if(now.timeStr === wakeUp_time.timeStr) {
+        console.log('Cas vstavat!');
         wakeUp();
     }
 
