@@ -1,0 +1,5 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Terminal autostart
+Comment=Start a terminal and list directory
+Exec=/usr/bin/lxterm -e 'ls -l | less'
